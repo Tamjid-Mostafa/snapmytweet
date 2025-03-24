@@ -30,7 +30,7 @@ export default function EditorPanel({ tweetData, setTweetData }: any) {
         ))}
         <div>
           <Label className="block text-sm font-medium mb-1">
-            Background Color (optional)
+            Time
           </Label>
           <DateTimePicker24h
             value={tweetData.timestamp}
