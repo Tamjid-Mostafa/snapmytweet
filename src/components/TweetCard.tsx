@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { format } from "date-fns";
+import { Verified } from "lucide-react";
 
 export default function TweetCard({
   name,
@@ -11,10 +12,10 @@ export default function TweetCard({
   bgColor,
   width,
 }: any) {
-    const formattedTimestamp =
-  timestamp instanceof Date && !isNaN(timestamp.getTime())
-    ? format(timestamp, 'hh:mm a · M/dd/yy')
-    : '';
+  const formattedTimestamp =
+    timestamp instanceof Date && !isNaN(timestamp.getTime())
+      ? format(timestamp, "hh:mm a · M/dd/yy")
+      : "";
 
   return (
     <Card
@@ -33,7 +34,10 @@ export default function TweetCard({
             <div className="w-10 h-10 rounded-full bg-muted" />
           )}
           <div>
-            <p className="font-medium leading-none">{name}</p>
+            <p className="font-medium leading-none flex items-center gap-1">
+              {name} <Verified className="h-4 w-4 text-white fill-blue-600" />
+            </p>
+
             <p className="text-sm text-muted-foreground">@{username}</p>
           </div>
         </div>
