@@ -38,9 +38,7 @@ export default function HomePage() {
   return (
     <main className="md:min-h-screen flex flex-col md:flex-row items-start justify-center p-4 md:p-6 gap-6 overflow-x-hidden">
       <div className="w-full flex flex-col-reverse md:flex-row gap-6 items-center md:items-start max-w-5xl mx-auto">
-        <ScrollArea className="md:h-full h-[40vh] w-full max-w-sm">
           <EditorPanel tweetData={tweetData} setTweetData={setTweetData} />
-        </ScrollArea>
       <div className="flex flex-col items-center gap-4 w-full">
         <div ref={cardRef}>
           <TweetCard {...tweetData} />
