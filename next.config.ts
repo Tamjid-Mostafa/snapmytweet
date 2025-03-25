@@ -9,7 +9,7 @@ const cspHeader = `
   base-uri 'self';
   form-action 'self' https://accounts.google.com https://authjs.dev;
   frame-ancestors 'none';
-  connect-src 'self' https://*.clerk.accounts.dev https://media.licdn.com;
+  connect-src 'self' https://*.clerk.accounts.dev https://media.licdn.com https://res.cloudinary.com;
   block-all-mixed-content;
   upgrade-insecure-requests;
 `.replace(/\s{2,}/g, " ").trim();

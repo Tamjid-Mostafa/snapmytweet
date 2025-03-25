@@ -84,7 +84,7 @@ export default function HomePage() {
                     transition: "filter 0.3s ease",
                   }}
                 >
-                  <TweetCard {...tweetData} />
+                  <MemoizedTweetCard {...tweetData} />
                 </div>
               </div>
             ) : (
