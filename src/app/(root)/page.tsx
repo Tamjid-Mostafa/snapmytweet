@@ -11,9 +11,8 @@ const LOCAL_KEY = "tweetImageData";
 const defaultTweetData = {
   name: "Tamjid Mostafa",
   username: "t4mjid",
-  profileImage:
-    "https://res.cloudinary.com/dmgswrlcd/image/upload/v1742867822/tweet-images/fqgtsvwksdlbqdu4ayay.png",
-  timestamp: "2025-03-25T01:55:45.344Z",
+  profileImage: "",
+  timestamp: new Date(),
   tweetText:
     "Good code gets you in the door.\nClear updates keep you in the room.",
   hashtags: "#FreelanceDev #SaaSBuilders #ClientRetention",
