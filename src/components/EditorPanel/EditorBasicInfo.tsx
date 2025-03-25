@@ -7,10 +7,6 @@ import Dropzone from "../Dropzone";
 import { Textarea } from "../ui/textarea";
 
 export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
-  const [value, setValue] = useState<string | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [publicId, setPublicId] = useState<string | null>(null);
-
   return (
     <div className="space-y-4">
       <div>
@@ -31,12 +27,12 @@ export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
       </div>
       <div>
         <Label>Profile Image</Label>
-        <Dropzone
+        <MediaUploader
           value={tweetData.profileImage}
-          onChange={(base64) =>
-            setTweetData({ ...tweetData, profileImage: base64 })
+          onChange={(url) =>
+            setTweetData({ ...tweetData, profileImage: url })
           }
-          fieldName="Upload Profile Image"
+          folder="snapmytweet"
         />
       </div>
       <div>

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { CldImage, CldUploadWidget } from 'next-cloudinary';
-import { toast } from 'sonner';
-import { Upload, Trash2, RotateCcw, Loader2 } from 'lucide-react';
-import { Button } from './ui/button';
-import { deleteImageFromCloudinary } from '@/lib/actions/delete-image-cloudinary.action';
+import React, { useRef, useState } from "react";
+import { CldImage, CldUploadWidget } from "next-cloudinary";
+import { toast } from "sonner";
+import { Upload, Trash2, RotateCcw, Loader2 } from "lucide-react";
+import { Button } from "./ui/button";
+import { deleteImageFromCloudinary } from "@/lib/actions/delete-image-cloudinary.action";
 
 interface MediaUploaderProps {
   value: string | null;
@@ -20,12 +20,16 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
 }) => {
   const [uploadWidget, setUploadWidget] = useState<any>(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [dimensions, setDimensions] = useState<{ width: number; height: number } | null>(null);
+  const [dimensions, setDimensions] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
   const [publicId, setPublicId] = useState<string | null>(null);
+  const widgetRef = useRef<any>(null);
 
   const handleDelete = async () => {
     if (!publicId) {
-      toast.error('Public ID not found!');
+      toast.error("Public ID not found!");
       return;
     }
 
@@ -33,23 +37,23 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
     try {
       const response = await deleteImageFromCloudinary(publicId);
       if (response.success) {
-        toast.success('Image deleted');
+        toast.success("Image deleted");
         onChange(null);
         setPublicId(null);
         setDimensions(null);
       } else {
-        toast.error('Delete failed. Try again.');
+        toast.error("Delete failed. Try again.");
       }
     } catch (err) {
-      toast.error('Error deleting image');
+      toast.error("Error deleting image");
     } finally {
       setIsDeleting(false);
     }
   };
 
   const handleRetry = () => {
-    if (uploadWidget) {
-      uploadWidget.open();
+    if (widgetRef.current) {
+      widgetRef.current?.open();
     }
   };
 
@@ -57,20 +61,24 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
     <div className="flex flex-col gap-4">
       <CldUploadWidget
         uploadPreset="naan-o-kebab"
-        options={{ multiple: false, resourceType: 'image', folder }}
+        options={{ multiple: false, resourceType: "image", folder }}
         onSuccess={(result: any, { widget }) => {
           const url = result.info.secure_url;
           onChange(url);
           setPublicId(result.info.public_id);
-          setDimensions({ width: result.info.width, height: result.info.height });
+          setDimensions({
+            width: result.info.width,
+            height: result.info.height,
+          });
           setUploadWidget(widget);
-          toast.success('Upload successful');
+          toast.success("Upload successful");
         }}
-        onError={() => toast.error('Upload failed')}
-        onAbort={() => toast.warning('Upload aborted')}
+        onError={() => toast.error("Upload failed")}
+        onAbort={() => toast.warning("Upload aborted")}
       >
-        {({ open }) =>
-          value ? (
+        {({ open, widget }) => {
+          widgetRef.current = widget;
+          return value ? (
             <div className="relative cursor-pointer overflow-hidden rounded-md w-full max-w-lg">
               <CldImage
                 src={value}
@@ -86,28 +94,32 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
                 </p>
               )}
               <div className="absolute top-2 right-2 flex gap-2">
-                <Button
-                  type="button"
-                  size="icon"
-                  className="w-8 h-8 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                  onClick={handleDelete}
-                  disabled={isDeleting}
-                >
-                  {isDeleting ? (
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                  ) : (
-                    <Trash2 className="w-5 h-5" />
-                  )}
-                </Button>
+                {widgetRef.current && (
+                  <>
+                    <Button
+                      type="button"
+                      size="icon"
+                      className="w-8 h-8 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                      onClick={handleDelete}
+                      disabled={isDeleting}
+                    >
+                      {isDeleting ? (
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                      ) : (
+                        <Trash2 className="w-5 h-5" />
+                      )}
+                    </Button>
 
-                <Button
-                  type="button"
-                  size="icon"
-                  className="w-8 h-8 bg-blue-500 text-white rounded-full p-1 hover:bg-blue-600"
-                  onClick={handleRetry}
-                >
-                  <RotateCcw className="w-5 h-5" />
-                </Button>
+                    <Button
+                      type="button"
+                      size="icon"
+                      className="w-8 h-8 bg-blue-500 text-white rounded-full p-1 hover:bg-blue-600"
+                      onClick={handleRetry}
+                    >
+                      <RotateCcw className="w-5 h-5" />
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           ) : (
@@ -118,8 +130,8 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
               <Upload className="w-6 h-6" />
               <p className="text-xs text-gray-500 mt-2">Click to upload</p>
             </div>
-          )
-        }
+          );
+        }}
       </CldUploadWidget>
     </div>
   );
