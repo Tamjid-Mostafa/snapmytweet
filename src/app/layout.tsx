@@ -8,10 +8,11 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FitLife - Your Fitness Journey Starts Here",
+  title: "SnapMyTweet - Create Stunning Tweet Images",
   description:
-    "Track your workouts, set goals, and achieve your fitness dreams",
+    "Design and export beautiful tweet-style images with full customization. Perfect for sharing insights, threads, and quotes on social media.",
 };
+
 
 export default function RootLayout({
   children,
