@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import TweetCard from "@/components/TweetCard";
 import DownloadButton from "@/components/DownloadButton";
@@ -32,6 +33,7 @@ const defaultTweetData = {
   fontFamily: "sans-serif",
   textAlign: "left",
 };
+const MemoizedTweetCard = memo(TweetCard);
 
 export default function HomePage() {
   const [tweetData, setTweetData] = useState(defaultTweetData);
@@ -46,15 +48,20 @@ export default function HomePage() {
     }
   }, []);
 
+  const saveToStorage = useDebouncedCallback((data) => {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(data));
+  }, 500);
+
   useEffect(() => {
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(tweetData));
-  }, [tweetData]);
-  function hexToRgba(hex: string, opacity: number): string {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-  }
+    saveToStorage(tweetData);
+  }, [tweetData, saveToStorage]);
+
+  const shadowColor = useMemo(() => {
+    const r = parseInt(tweetData.shadowColor.slice(1, 3), 16);
+    const g = parseInt(tweetData.shadowColor.slice(3, 5), 16);
+    const b = parseInt(tweetData.shadowColor.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${tweetData.shadowOpacity})`;
+  }, [tweetData.shadowColor, tweetData.shadowOpacity]);
 
   console.log(tweetData.shadowColor);
   return (
@@ -73,12 +80,7 @@ export default function HomePage() {
               >
                 <div
                   style={{
-                    filter: `drop-shadow(0 4px ${
-                      tweetData.shadowStrength
-                    }px ${hexToRgba(
-                      tweetData.shadowColor,
-                      tweetData.shadowOpacity
-                    )})`,
+                    filter: `drop-shadow(0 4px ${tweetData.shadowStrength}px ${shadowColor})`,
                     transition: "filter 0.3s ease",
                   }}
                 >
@@ -88,16 +90,11 @@ export default function HomePage() {
             ) : (
               <div
                 style={{
-                  filter: `drop-shadow(0 4px ${
-                    tweetData.shadowStrength
-                  }px ${hexToRgba(
-                    tweetData.shadowColor,
-                    tweetData.shadowOpacity
-                  )})`,
+                  filter: `drop-shadow(0 4px ${tweetData.shadowStrength}px ${shadowColor})`,
                   transition: "filter 0.3s ease",
                 }}
               >
-                <TweetCard {...tweetData} />
+                <MemoizedTweetCard {...tweetData} />
               </div>
             )}
           </div>
