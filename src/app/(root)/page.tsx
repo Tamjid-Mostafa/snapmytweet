@@ -38,12 +38,12 @@ export default function HomePage() {
   return (
     <main className="md:min-h-[calc(100vh-200px)] flex flex-col md:flex-row items-start justify-center p-4 md:p-6 gap-6 overflow-x-hidden">
       <div className="w-full flex flex-col-reverse md:flex-row gap-6 items-center md:items-start max-w-5xl mx-auto">
-          <EditorPanel tweetData={tweetData} setTweetData={setTweetData} />
-      <div className="flex flex-col items-center gap-4 w-full">
-        <div ref={cardRef}>
-          <TweetCard {...tweetData} />
-        </div>
-        <DownloadButton cardRef={cardRef} />
+        <EditorPanel tweetData={tweetData} setTweetData={setTweetData} />
+        <div className="flex flex-col items-center gap-4 w-full">
+          <div ref={cardRef}>
+            <TweetCard {...tweetData} />
+          </div>
+          <DownloadButton cardRef={cardRef} />
         </div>
       </div>
     </main>

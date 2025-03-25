@@ -33,7 +33,7 @@ export default function EditorPanel({ tweetData, setTweetData }: any) {
           </div>
 
           <div>
-            <Label className="block text-sm font-medium mb-1">Profile Image (url)</Label>
+            <Label className="block text-sm font-medium mb-1">Profile Image (LinkedIn Image url)</Label>
             <Input
               type="text"
               value={tweetData.profileImage}
