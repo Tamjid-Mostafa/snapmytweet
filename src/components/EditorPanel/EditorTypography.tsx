@@ -9,41 +9,53 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function EditorTypography({ tweetData, setTweetData }: any) {
-  return (
-    <div className="space-y-4">
-      <div>
-        <Label>Font Size ({tweetData.fontSize}px)</Label>
-        <Slider
-          min={10}
-          max={24}
-          step={1}
-          value={[tweetData.fontSize]}
-          onValueChange={([val]) =>
-            setTweetData({ ...tweetData, fontSize: val })
-          }
-        />
-      </div>
+const fontFamilies = [
+  { label: "Sans-serif", value: "sans-serif" },
+  { label: "Serif", value: "serif" },
+  { label: "Monospace", value: "monospace" },
+  { label: "System", value: "system-ui" },
+];
 
-      <div>
-        <Label>Font Family</Label>
-        <Select
-          value={tweetData.fontFamily}
-          onValueChange={(val) =>
-            setTweetData({ ...tweetData, fontFamily: val })
-          }
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Choose font" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="sans-serif">Sans-serif</SelectItem>
-            <SelectItem value="serif">Serif</SelectItem>
-            <SelectItem value="monospace">Monospace</SelectItem>
-            <SelectItem value="system-ui">System</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+export default function EditorTypography({ tweetData, setTweetData }: any) {
+  const renderFontControls = (label: string, key: string) => (
+    <div className="space-y-2">
+      <Label>{label} Font Size ({tweetData[`${key}FontSize`]}px)</Label>
+      <Slider
+        min={10}
+        max={32}
+        step={1}
+        value={[tweetData[`${key}FontSize`]]}
+        onValueChange={([val]) =>
+          setTweetData({ ...tweetData, [`${key}FontSize`]: val })
+        }
+      />
+      <Label>{label} Font Family</Label>
+      <Select
+        value={tweetData[`${key}FontFamily`]}
+        onValueChange={(val) =>
+          setTweetData({ ...tweetData, [`${key}FontFamily`]: val })
+        }
+      >
+        <SelectTrigger>
+          <SelectValue placeholder="Choose font" />
+        </SelectTrigger>
+        <SelectContent>
+          {fontFamilies.map((f) => (
+            <SelectItem key={f.value} value={f.value}>
+              {f.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+
+  return (
+    <div className="space-y-6">
+      {renderFontControls("Tweet", "tweet")}
+      {renderFontControls("Username", "username")}
+      {renderFontControls("Hashtag", "hashtag")}
+      {renderFontControls("Timestamp", "timestamp")}
 
       <div>
         <Label>Text Align</Label>
@@ -64,48 +76,47 @@ export default function EditorTypography({ tweetData, setTweetData }: any) {
         </Select>
       </div>
 
-      <div>
-        <Label>Text Color</Label>
-        <Input
-          type="color"
-          value={tweetData.textColor}
-          onChange={(e) =>
-            setTweetData({ ...tweetData, textColor: e.target.value })
-          }
-        />
-      </div>
-
-      <div>
-        <Label>Username Color</Label>
-        <Input
-          type="color"
-          value={tweetData.usernameColor}
-          onChange={(e) =>
-            setTweetData({ ...tweetData, usernameColor: e.target.value })
-          }
-        />
-      </div>
-
-      <div>
-        <Label>Hashtag Color</Label>
-        <Input
-          type="color"
-          value={tweetData.hashtagColor}
-          onChange={(e) =>
-            setTweetData({ ...tweetData, hashtagColor: e.target.value })
-          }
-        />
-      </div>
-
-      <div>
-        <Label>Timestamp Color</Label>
-        <Input
-          type="color"
-          value={tweetData.timestampColor}
-          onChange={(e) =>
-            setTweetData({ ...tweetData, timestampColor: e.target.value })
-          }
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <Label>Text Color</Label>
+          <Input
+            type="color"
+            value={tweetData.textColor}
+            onChange={(e) =>
+              setTweetData({ ...tweetData, textColor: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <Label>Username Color</Label>
+          <Input
+            type="color"
+            value={tweetData.usernameColor}
+            onChange={(e) =>
+              setTweetData({ ...tweetData, usernameColor: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <Label>Hashtag Color</Label>
+          <Input
+            type="color"
+            value={tweetData.hashtagColor}
+            onChange={(e) =>
+              setTweetData({ ...tweetData, hashtagColor: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <Label>Timestamp Color</Label>
+          <Input
+            type="color"
+            value={tweetData.timestampColor}
+            onChange={(e) =>
+              setTweetData({ ...tweetData, timestampColor: e.target.value })
+            }
+          />
+        </div>
       </div>
     </div>
   );

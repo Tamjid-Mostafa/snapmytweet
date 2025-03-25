@@ -13,6 +13,7 @@ const defaultTweetData = {
   username: "t4mjid",
   profileImage: "",
   timestamp: new Date(),
+
   tweetText: `Good code gets you in the door.  
 Clear updates keep you in the room.
 
@@ -22,10 +23,19 @@ Clear updates keep you in the room.
 - Consistency is compound interest.  
 - Your website is your handshake.  
 - Clients don’t hire skills — they hire clarity.`,
+
   hashtags: "#FreelanceDev #SaaSBuilders #ClientRetention",
+
+  // card layout + appearance
   bgColor: "#000000",
   width: 350,
   cardPadding: 24,
+  textAlign: "left",
+  borderRadius: 16,
+  borderColor: "#e5e7eb",
+  borderWidth: 0,
+
+  // shadow + canvas
   showCanvas: true,
   canvasBg: "#05ff65",
   canvasPaddingX: 36,
@@ -33,17 +43,27 @@ Clear updates keep you in the room.
   shadowStrength: 17,
   shadowColor: "#000000",
   shadowOpacity: 0.48,
-  borderRadius: 16,
-  borderColor: "#e5e7eb",
-  borderWidth: 0,
-  fontSize: 16,
-  fontFamily: "sans-serif",
-  textAlign: "left",
+
+  // colors
   textColor: "#ffffff",
   usernameColor: "#6b7280",
   hashtagColor: "#1c60e9",
   timestampColor: "#9ca3af",
+
+  // font styles
+  tweetFontSize: 16,
+  tweetFontFamily: "sans-serif",
+
+  usernameFontSize: 14,
+  usernameFontFamily: "sans-serif",
+
+  hashtagFontSize: 14,
+  hashtagFontFamily: "sans-serif",
+
+  timestampFontSize: 12,
+  timestampFontFamily: "sans-serif",
 };
+
 const MemoizedTweetCard = memo(TweetCard);
 
 export default function HomePage() {
@@ -74,7 +94,6 @@ export default function HomePage() {
     return `rgba(${r}, ${g}, ${b}, ${tweetData.shadowOpacity})`;
   }, [tweetData.shadowColor, tweetData.shadowOpacity]);
 
-  console.log(tweetData.shadowColor);
   return (
     <main className="md:min-h-[calc(100vh-200px)] flex flex-col md:flex-row items-start justify-center p-4 md:p-6 gap-6 overflow-x-hidden">
       <div className="w-full flex flex-col-reverse md:flex-row gap-6 items-center md:items-start max-w-5xl mx-auto">

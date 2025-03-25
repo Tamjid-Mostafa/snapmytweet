@@ -13,12 +13,26 @@ export default function TweetCard(props: any) {
     hashtags,
     bgColor,
     width,
-    fontSize,
-    fontFamily,
-    textAlign,
     borderRadius,
     borderWidth,
     borderColor,
+    textAlign,
+
+    cardPadding,
+
+    textColor,
+    usernameColor,
+    hashtagColor,
+    timestampColor,
+
+    tweetFontSize,
+    tweetFontFamily,
+    usernameFontSize,
+    usernameFontFamily,
+    hashtagFontSize,
+    hashtagFontFamily,
+    timestampFontSize,
+    timestampFontFamily,
   } = props;
 
   const formattedTimestamp =
@@ -34,13 +48,12 @@ export default function TweetCard(props: any) {
         borderRadius: `${borderRadius}px`,
         borderWidth,
         borderColor,
-        fontFamily,
-        fontSize: `${fontSize}px`,
         textAlign,
       }}
       className="text-foreground border"
     >
-      <CardContent style={{ padding: `${props.cardPadding || 24}px` }}>
+      <CardContent style={{ padding: `${cardPadding || 24}px` }}>
+        {/* Header */}
         <div className="flex items-center gap-3 mb-4">
           <Avatar className="w-10 h-10">
             <AvatarImage src={profileImage} alt={name} />
@@ -49,27 +62,61 @@ export default function TweetCard(props: any) {
           <div>
             <p
               className="font-medium leading-none flex items-center gap-1"
-              style={{ color: props.textColor }}
+              style={{
+                color: textColor,
+                fontSize: `${usernameFontSize}px`,
+                fontFamily: usernameFontFamily,
+              }}
             >
               {name}
               <VerifiedIcon className="w-4 h-4 fill-[#1DA1F2] text-white" />
             </p>
-            <p className="text-sm" style={{ color: props.usernameColor }}>
+            <p
+              className="text-sm"
+              style={{
+                color: usernameColor,
+                fontSize: `${usernameFontSize}px`,
+                fontFamily: usernameFontFamily,
+              }}
+            >
               @{username}
             </p>
           </div>
         </div>
 
+        {/* Tweet Content */}
         <p
-          className="whitespace-pre-line text-base mb-4"
-          style={{ color: props.textColor }}
+          className="whitespace-pre-line mb-4"
+          style={{
+            color: textColor,
+            fontSize: `${tweetFontSize}px`,
+            fontFamily: tweetFontFamily,
+          }}
         >
           {tweetText}
         </p>
-        <p className="text-sm" style={{ color: props.hashtagColor }}>
+
+        {/* Hashtags */}
+        <p
+          className="text-sm"
+          style={{
+            color: hashtagColor,
+            fontSize: `${hashtagFontSize}px`,
+            fontFamily: hashtagFontFamily,
+          }}
+        >
           {hashtags}
         </p>
-        <p className="mt-4 text-xs" style={{ color: props.timestampColor }}>
+
+        {/* Timestamp */}
+        <p
+          className="mt-4 text-xs"
+          style={{
+            color: timestampColor,
+            fontSize: `${timestampFontSize}px`,
+            fontFamily: timestampFontFamily,
+          }}
+        >
           {formattedTimestamp} · {name}
         </p>
       </CardContent>
