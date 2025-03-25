@@ -4,6 +4,7 @@ import { DateTimePicker24h } from "../DateTimePicker24h";
 import MediaUploader from "../MediaUploader";
 import { useState } from "react";
 import Dropzone from "../Dropzone";
+import { Textarea } from "../ui/textarea";
 
 export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
   const [value, setValue] = useState<string | null>(null);
@@ -39,14 +40,25 @@ export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
         />
       </div>
       <div>
-        <Label>Tweet Text</Label>
-        <Input
+        <div className="flex justify-between items-center mb-1">
+          <Label>Tweet Text</Label>
+          <span className="text-xs text-muted-foreground">
+            {tweetData.tweetText.length}/280 characters
+          </span>
+        </div>
+        <Textarea
           value={tweetData.tweetText}
-          onChange={(e) =>
-            setTweetData({ ...tweetData, tweetText: e.target.value })
-          }
+          onChange={(e) => {
+            const input = e.target.value;
+            if (input.length <= 280) {
+              setTweetData({ ...tweetData, tweetText: input });
+            }
+          }}
+          placeholder="Write your tweet..."
+
         />
       </div>
+
       <div>
         <Label>Hashtags</Label>
         <Input

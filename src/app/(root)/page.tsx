@@ -13,8 +13,15 @@ const defaultTweetData = {
   username: "t4mjid",
   profileImage: "",
   timestamp: new Date(),
-  tweetText:
-    "Good code gets you in the door.\nClear updates keep you in the room.",
+  tweetText: `Good code gets you in the door.  
+Clear updates keep you in the room.
+
+- Show up, even when it's hard.  
+- Build before you beg.  
+- Done > Perfect.  
+- Consistency is compound interest.  
+- Your website is your handshake.  
+- Clients don’t hire skills — they hire clarity.`,
   hashtags: "#FreelanceDev #SaaSBuilders #ClientRetention",
   bgColor: "#000000",
   width: 350,
