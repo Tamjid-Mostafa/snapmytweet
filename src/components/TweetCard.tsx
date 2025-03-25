@@ -47,17 +47,29 @@ export default function TweetCard(props: any) {
             <AvatarFallback>{name?.[0] || "?"}</AvatarFallback>
           </Avatar>
           <div>
-            <p className="font-medium leading-none flex items-center gap-1">
+            <p
+              className="font-medium leading-none flex items-center gap-1"
+              style={{ color: props.textColor }}
+            >
               {name}
               <VerifiedIcon className="w-4 h-4 fill-[#1DA1F2] text-white" />
             </p>
-            <p className="text-sm text-muted-foreground">@{username}</p>
+            <p className="text-sm" style={{ color: props.usernameColor }}>
+              @{username}
+            </p>
           </div>
         </div>
 
-        <p className="whitespace-pre-line text-base mb-4">{tweetText}</p>
-        <p className="text-sm text-muted-foreground">{hashtags}</p>
-        <p className="mt-4 text-xs text-muted-foreground">
+        <p
+          className="whitespace-pre-line text-base mb-4"
+          style={{ color: props.textColor }}
+        >
+          {tweetText}
+        </p>
+        <p className="text-sm" style={{ color: props.hashtagColor }}>
+          {hashtags}
+        </p>
+        <p className="mt-4 text-xs" style={{ color: props.timestampColor }}>
           {formattedTimestamp} · {name}
         </p>
       </CardContent>

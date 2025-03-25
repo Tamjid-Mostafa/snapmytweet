@@ -76,6 +76,17 @@ export default function EditorCardStyle({ tweetData, setTweetData }: any) {
           className="h-10 p-0 border-none"
         />
       </div>
+      <div>
+        <Label>Card Background Color</Label>
+        <Input
+          type="color"
+          value={tweetData.bgColor}
+          onChange={(e) =>
+            setTweetData({ ...tweetData, bgColor: e.target.value })
+          }
+          className="h-10 p-0 border-none"
+        />
+      </div>
     </div>
   );
 }

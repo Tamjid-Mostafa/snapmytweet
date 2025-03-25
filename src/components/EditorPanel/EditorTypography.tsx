@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import {
@@ -12,9 +13,7 @@ export default function EditorTypography({ tweetData, setTweetData }: any) {
   return (
     <div className="space-y-4">
       <div>
-        <Label>
-          Font Size ({tweetData.fontSize}px)
-        </Label>
+        <Label>Font Size ({tweetData.fontSize}px)</Label>
         <Slider
           min={10}
           max={24}
@@ -63,6 +62,50 @@ export default function EditorTypography({ tweetData, setTweetData }: any) {
             <SelectItem value="right">Right</SelectItem>
           </SelectContent>
         </Select>
+      </div>
+
+      <div>
+        <Label>Text Color</Label>
+        <Input
+          type="color"
+          value={tweetData.textColor}
+          onChange={(e) =>
+            setTweetData({ ...tweetData, textColor: e.target.value })
+          }
+        />
+      </div>
+
+      <div>
+        <Label>Username Color</Label>
+        <Input
+          type="color"
+          value={tweetData.usernameColor}
+          onChange={(e) =>
+            setTweetData({ ...tweetData, usernameColor: e.target.value })
+          }
+        />
+      </div>
+
+      <div>
+        <Label>Hashtag Color</Label>
+        <Input
+          type="color"
+          value={tweetData.hashtagColor}
+          onChange={(e) =>
+            setTweetData({ ...tweetData, hashtagColor: e.target.value })
+          }
+        />
+      </div>
+
+      <div>
+        <Label>Timestamp Color</Label>
+        <Input
+          type="color"
+          value={tweetData.timestampColor}
+          onChange={(e) =>
+            setTweetData({ ...tweetData, timestampColor: e.target.value })
+          }
+        />
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const defaultTweetData = {
   tweetText:
     "Good code gets you in the door.\nClear updates keep you in the room.",
   hashtags: "#FreelanceDev #SaaSBuilders #ClientRetention",
-  bgColor: "#ffffff",
+  bgColor: "#000000",
   width: 350,
   cardPadding: 24,
   showCanvas: false,
@@ -32,6 +32,10 @@ const defaultTweetData = {
   fontSize: 16,
   fontFamily: "sans-serif",
   textAlign: "left",
+  textColor: "#000000",
+  usernameColor: "#6b7280",
+  hashtagColor: "#6b7280",
+  timestampColor: "#9ca3af",
 };
 const MemoizedTweetCard = memo(TweetCard);
 
