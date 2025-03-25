@@ -87,7 +87,7 @@ export default function EditorPanel({ tweetData, setTweetData }: any) {
             />
           </div>
 
-          {/* <div>
+          <div>
             <Label className="block text-sm font-medium mb-1">
               Card Width ({tweetData.width}px)
             </Label>
@@ -98,7 +98,7 @@ export default function EditorPanel({ tweetData, setTweetData }: any) {
               value={[tweetData.width]}
               onValueChange={([val]) => setTweetData({ ...tweetData, width: val })}
             />
-          </div> */}
+          </div>
         </CardContent>
       </ScrollArea>
     </Card>
