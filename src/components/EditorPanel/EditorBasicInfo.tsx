@@ -5,6 +5,7 @@ import MediaUploader from "../MediaUploader";
 import { useState } from "react";
 import Dropzone from "../Dropzone";
 import { Textarea } from "../ui/textarea";
+import { Slider } from "../ui/slider";
 
 export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
   return (
@@ -29,12 +30,23 @@ export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
         <Label>Profile Image</Label>
         <MediaUploader
           value={tweetData.profileImage}
-          onChange={(url) =>
-            setTweetData({ ...tweetData, profileImage: url })
-          }
+          onChange={(url) => setTweetData({ ...tweetData, profileImage: url })}
           folder="snapmytweet"
         />
       </div>
+      <div className="space-y-2">
+        <Label>Profile Image Size ({tweetData.profileImageSize}px)</Label>
+        <Slider
+          min={24}
+          max={96}
+          step={1}
+          value={[tweetData.profileImageSize]}
+          onValueChange={([val]) =>
+            setTweetData({ ...tweetData, profileImageSize: val })
+          }
+        />
+      </div>
+
       <div>
         <div className="flex justify-between items-center mb-1">
           <Label>Tweet Text</Label>
@@ -51,7 +63,6 @@ export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
             }
           }}
           placeholder="Write your tweet..."
-
         />
       </div>
 

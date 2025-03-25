@@ -11,7 +11,10 @@ const LOCAL_KEY = "tweetImageData";
 const defaultTweetData = {
   name: "Tamjid Mostafa",
   username: "t4mjid",
+
   profileImage: "",
+  profileImageSize: 40,
+
   timestamp: new Date(),
 
   tweetText: `Good code gets you in the door.  

@@ -8,6 +8,7 @@ export default function TweetCard(props: any) {
     name,
     username,
     profileImage,
+    profileImageSize,
     timestamp,
     tweetText,
     hashtags,
@@ -55,7 +56,12 @@ export default function TweetCard(props: any) {
       <CardContent style={{ padding: `${cardPadding || 24}px` }}>
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">
-          <Avatar className="w-10 h-10">
+          <Avatar
+            style={{
+              width: `${profileImageSize}px`,
+              height: `${profileImageSize}px`,
+            }}
+          >
             <AvatarImage src={profileImage} alt={name} />
             <AvatarFallback>{name?.[0] || "?"}</AvatarFallback>
           </Avatar>
