@@ -1,0 +1,69 @@
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+export default function EditorTypography({ tweetData, setTweetData }: any) {
+  return (
+    <div className="space-y-4">
+      <div>
+        <Label>
+          Font Size ({tweetData.fontSize}px)
+        </Label>
+        <Slider
+          min={10}
+          max={24}
+          step={1}
+          value={[tweetData.fontSize]}
+          onValueChange={([val]) =>
+            setTweetData({ ...tweetData, fontSize: val })
+          }
+        />
+      </div>
+
+      <div>
+        <Label>Font Family</Label>
+        <Select
+          value={tweetData.fontFamily}
+          onValueChange={(val) =>
+            setTweetData({ ...tweetData, fontFamily: val })
+          }
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Choose font" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="sans-serif">Sans-serif</SelectItem>
+            <SelectItem value="serif">Serif</SelectItem>
+            <SelectItem value="monospace">Monospace</SelectItem>
+            <SelectItem value="system-ui">System</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div>
+        <Label>Text Align</Label>
+        <Select
+          value={tweetData.textAlign}
+          onValueChange={(val) =>
+            setTweetData({ ...tweetData, textAlign: val })
+          }
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Choose alignment" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="left">Left</SelectItem>
+            <SelectItem value="center">Center</SelectItem>
+            <SelectItem value="right">Right</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  );
+}
