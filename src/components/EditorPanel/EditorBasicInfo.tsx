@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label";
 import { DateTimePicker24h } from "../DateTimePicker24h";
 import MediaUploader from "../MediaUploader";
 import { useState } from "react";
+import Dropzone from "../Dropzone";
 
 export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
   const [value, setValue] = useState<string | null>(null);
@@ -29,10 +30,12 @@ export default function EditorBasicInfo({ tweetData, setTweetData }: any) {
       </div>
       <div>
         <Label>Profile Image</Label>
-        <MediaUploader
+        <Dropzone
           value={tweetData.profileImage}
-          onChange={(url) => setTweetData({ ...tweetData, profileImage: url })}
-          folder="tweet-images"
+          onChange={(base64) =>
+            setTweetData({ ...tweetData, profileImage: base64 })
+          }
+          fieldName="Upload Profile Image"
         />
       </div>
       <div>
