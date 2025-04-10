@@ -18,7 +18,6 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
   onChange,
   folder,
 }) => {
-  const [uploadWidget, setUploadWidget] = useState<any>(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [dimensions, setDimensions] = useState<{
     width: number;
@@ -70,7 +69,6 @@ const MediaUploader: React.FC<MediaUploaderProps> = ({
             width: result.info.width,
             height: result.info.height,
           });
-          setUploadWidget(widget);
           toast.success("Upload successful");
         }}
         onError={() => toast.error("Upload failed")}
